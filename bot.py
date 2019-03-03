@@ -42,7 +42,9 @@ def replyToUser(response, msg_id, requestor):
 
     api.update_status(reply, msg_id)
 
-def main(timeline):
+def main():
+    # Last 5 mentions
+    timeline = api.mentions_timeline(count = 5)
     for i in range(len(timeline)):
         message = timeline[i].text
         requestor = timeline[i].user.screen_name
@@ -52,7 +54,5 @@ def main(timeline):
         response = send_eth(address)
         replyToUser(response, msg_id, requestor)
 
-# Last 5 mentions
-timeline = api.mentions_timeline(count = 5)
-
-main(timeline)
+if __name__ == '__main__':
+    main()
